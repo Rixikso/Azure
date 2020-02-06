@@ -1,0 +1,9 @@
+<div *ngFor="let number of [0,1,2]">
+    <app-user></app-user>
+</div>
+
+<button (click)="warnUser()">
+    clicka me
+</button>
+<input type="text" [{{ngModel}}]="inputValue" style="display: block;">
+<p>Hello {{inputValue}}</p>
