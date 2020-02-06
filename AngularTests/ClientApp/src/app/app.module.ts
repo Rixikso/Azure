@@ -11,12 +11,12 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserComponent } from './components/user/user.component';
+import { WeatherForecastService } from './core/weather-forecast.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-   
 
     HomeComponent,
     CounterComponent,
@@ -34,7 +34,7 @@ import { UserComponent } from './components/user/user.component';
       { path: 'fetch-data', component: FetchDataComponent },
     ])
   ],
-  providers: [],
+  providers: [WeatherForecastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

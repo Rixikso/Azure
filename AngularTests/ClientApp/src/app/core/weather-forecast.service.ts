@@ -1,15 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { WeatherForecast } from '../types/weather-forecast';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherForecastService {
-  public baseUrl: string = "/api";
+  public baseUrl = '/api';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, @Inject('BASE_URL') baseUrl: string) { 
+    this.baseUrl = baseUrl;
+  }
 
-  public get() {
+  public getAll() {
     return this.httpClient.get<WeatherForecast[]>(this.baseUrl + 'weatherforecast');
   }
 
