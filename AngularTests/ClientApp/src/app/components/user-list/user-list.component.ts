@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
   public inputValue: string = '';
+  
   constructor() { }
 
   ngOnInit() {
