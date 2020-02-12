@@ -1,4 +1,6 @@
-<div *ngFor="let number of [0,1,2]">
+<!-- Info: odd -> if is odd = than it gets another css -->
+<div *ngFor="let number of [0,1,2]; let i=index; let odd=odd; trackBy:trackByFunction" [class.odd]="odd">
+    {{i}} {{number}}
     <app-user></app-user>
 </div>
 
