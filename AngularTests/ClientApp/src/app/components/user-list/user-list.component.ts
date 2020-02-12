@@ -7,14 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
   public inputValue: string = '';
-  
+  public today: Date = new Date();
+  public toggleBoy = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  public warnUser() {
-    alert('Yo');
+  public toggleWarning() {
+    this.toggleBoy = !this.toggleBoy;
   }
 
 }

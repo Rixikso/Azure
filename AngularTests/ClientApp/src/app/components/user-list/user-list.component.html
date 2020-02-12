@@ -2,8 +2,22 @@
     <app-user></app-user>
 </div>
 
-<button (click)="warnUser()">
+<button (click)="toggleWarning()">
     clicka me
 </button>
-<input type="text" [(ngModel)]="inputValue" style="display: block;">
-<p>Hello {{inputValue}}</p>
+
+<p *ngIf="toggleBoy">
+    Yo
+</p>
+
+<input type="number" [(ngModel)]="inputValue" style="display: block;">
+<p>Hello {{ inputValue | number:'1.2-2' }}</p>
+<p>{{ today | date: 'dd/MM/yyyy' }}</p>
+
+<!-- <div *ngIf="customers$ | async as customers">
+    <div *ngFor="let customer of customers">
+        <span>
+            {{ customer.firstName }}
+        </span> 
+    </div>
+</div> -->
