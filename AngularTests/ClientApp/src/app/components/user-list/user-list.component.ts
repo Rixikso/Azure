@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { mockedUsers } from 'src/app/mock-data/mock-users';
 
 @Component({
   selector: 'app-user-list',
@@ -9,11 +10,19 @@ export class UserListComponent implements OnInit {
   public inputValue = '';
   public today: Date = new Date();
   public toggleBoy = false;
-  public customers = [1, 2, 3];
+  public users: User[];
 
   constructor() { }
 
   ngOnInit() {
+    this.users = mockedUsers.sort(this.compareName);
+  }
+
+  public compareName(firstElement: User, secondElement: User) {
+    if (firstElement.lastName < secondElement.lastName ) { return -1; }
+    if (firstElement.lastName > secondElement.lastName ) { return 1; }
+
+    return 0;
   }
 
   public toggleWarning() {

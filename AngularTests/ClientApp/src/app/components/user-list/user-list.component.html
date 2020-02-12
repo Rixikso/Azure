@@ -16,10 +16,10 @@
 <p>Hello {{ inputValue | number:'1.2-2' }}</p>
 <p>{{ today | date: 'dd/MM/yyyy' }}</p>
 
-<!-- <div *ngIf="customers$ | async as customers">
-    <div *ngFor="let customer of customers">
+<!-- <div *ngIf="customers$ | async as customers"> -->
+    <div *ngFor="let user of users">
         <span>
-            {{ customer.firstName }}
+            {{ user.lastName }}
         </span> 
     </div>
-</div> -->
+<!-- </div> -->

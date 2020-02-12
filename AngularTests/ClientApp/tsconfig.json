@@ -12,7 +12,7 @@
     "target": "es2015",
     "typeRoots": [
       "node_modules/@types",
-      "src/types"
+      "src/models"
     ],
     "lib": [
       "es2017",
