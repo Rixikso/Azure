@@ -1,9 +1,4 @@
 <!-- Info: odd -> if is odd = than it gets another css -->
-<div *ngFor="let number of [0,1,2]; let i=index; let odd=odd; trackBy:trackByFunction" [class.odd]="odd">
-    {{i}} {{number}}
-    <app-user></app-user>
-</div>
-
 <button (click)="toggleWarning()">
     clicka me
 </button>
@@ -17,9 +12,7 @@
 <p>{{ today | date: 'dd/MM/yyyy' }}</p>
 
 <!-- <div *ngIf="customers$ | async as customers"> -->
-    <div *ngFor="let user of users">
-        <span>
-            {{ user.lastName }}
-        </span> 
-    </div>
+<div *ngFor="let user of users">
+    <app-user [childUser]="user"></app-user>
+</div>
 <!-- </div> -->
