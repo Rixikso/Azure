@@ -29,6 +29,10 @@ export class UserListComponent implements OnInit {
     this.toggleBoy = !this.toggleBoy;
   }
 
+  public onDelete(userToDelete: User) {
+    this.users = this.users.filter( x => x.id !== userToDelete.id );
+  }
+
   // Track by function allows you to recreate table only based on difference
   public trackByFunction(index, item) {
     // this is indentifier tracked by the ngFor for the optymalization

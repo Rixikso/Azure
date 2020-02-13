@@ -13,6 +13,6 @@
 
 <!-- <div *ngIf="customers$ | async as customers"> -->
 <div *ngFor="let user of users">
-    <app-user [childUser]="user"></app-user>
+    <app-user [childUser]="user" (deleted)="onDelete($event)"></app-user>
 </div>
 <!-- </div> -->
