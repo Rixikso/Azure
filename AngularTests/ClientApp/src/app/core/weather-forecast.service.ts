@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { WeatherForecast } from '../types/weather-forecast';
 import { Observable, EMPTY } from 'rxjs';
-import { map, publishReplay, refCount, catchError } from 'rxjs/operators';
+import { map, publishReplay, refCount, catchError, delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,7 @@ export class WeatherForecastService {
     this.weatherForecasts = this.httpClient
       .get<WeatherForecast[]>(this.baseUrl + 'weatherforecast')
       .pipe(
+        delay(1000),
         publishReplay(1),
         refCount(),
         catchError(error => {
