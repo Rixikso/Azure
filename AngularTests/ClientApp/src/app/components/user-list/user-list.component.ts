@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { mockedUsers } from 'src/app/mock-data/mock-users';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
@@ -10,12 +11,12 @@ export class UserListComponent implements OnInit {
   public inputValue = '';
   public today: Date = new Date();
   public toggleBoy = false;
-  public users: User[];
+  public users$: Observable<User[]>;
 
   constructor() { }
 
   ngOnInit() {
-    this.users = mockedUsers.sort(this.compareName);
+    this.users$ = of(mockedUsers);
   }
 
   public compareName(firstElement: User, secondElement: User) {
