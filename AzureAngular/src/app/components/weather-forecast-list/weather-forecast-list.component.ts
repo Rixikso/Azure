@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WeatherForecastDataProviderService } from 'src/app/core/weather-forecast-data-provider.service';
 
 @Component({
   selector: 'app-weather-forecast-list',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeatherForecastListComponent implements OnInit {
 
-  constructor() { }
+  public forecasts: WeatherForecast[];
 
-  ngOnInit(): void {
+  constructor(
+    private weatherForcastService: WeatherForecastDataProviderService) { }
+
+  public ngOnInit(): void {
+    this.weatherForcastService.getAll()
+    .subscribe(result => {
+      this.forecasts = result;
+    }, error => console.error(error));
   }
-
 }
