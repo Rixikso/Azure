@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AzureAPI.Services
 {
-    interface IInMemoryStorage<T>
+    public interface IInMemoryStorage<T>
     {
         Task AddAsync(T item);
 

@@ -4,7 +4,7 @@ import { WeatherForecastListComponent } from './components/weather-forecast-list
 
 
 const routes: Routes = [
-  { path: 'weatherforecast', component: WeatherForecastListComponent, pathMatch: 'full' },
+  { path: '', component: WeatherForecastListComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

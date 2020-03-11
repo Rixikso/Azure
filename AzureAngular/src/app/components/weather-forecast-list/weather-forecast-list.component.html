@@ -7,6 +7,8 @@
 
 <app-weather-forecast-form *ngIf="inEditMode"></app-weather-forecast-form>
 
+<button (click)="addRandomForecast()">Add Random Forecast</button>
+
 <!-- <p *ngIf="!forecasts"><em>Loading...</em></p> -->
 <div *ngIf="forecasts$ | async; let forecasts;">
     <table class='table table-striped' aria-labelledby="tableLabel">

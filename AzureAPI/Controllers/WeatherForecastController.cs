@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AzureAPI.Requests;
+using AzureAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -12,35 +13,51 @@ namespace AzureAPI.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        public WeatherForecastController(
+            IInMemoryStorage<WeatherForecast> weatherForecastStorage)
+        {
+            _weatherForecastStorage = weatherForecastStorage;
+        }
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet("/{id}")]
+        public async Task<IActionResult> Get(int id)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var weatherForecast = await _weatherForecastStorage.GetAsync(id);
+
+            return Ok(weatherForecast);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] CreateWeatherForecastDto forecastDto)
+        public async Task<IActionResult> Create([FromBody] CreateWeatherForecastDto forecastDto)
         {
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                Guid guid = Guid.NewGuid();
+
+                var weatherForecast = new WeatherForecast()
+                {
+                    Guid = guid.ToString(),
+                    Date = forecastDto.Date,
+                    Summary = forecastDto.Summary,
+                    TemperatureC = forecastDto.TemperatureC
+                };
+
+                await _weatherForecastStorage.AddAsync(weatherForecast);
+
+                return Created($"api/weatherForecast/{guid.ToString()}", weatherForecast);
+            }
+
+            return BadRequest();
         }
+
+
+        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IInMemoryStorage<WeatherForecast> _weatherForecastStorage;
     }
 }

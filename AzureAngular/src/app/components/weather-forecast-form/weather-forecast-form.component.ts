@@ -17,11 +17,11 @@ export class WeatherForecastFormComponent implements OnInit {
     summary: new FormControl(''),
   });
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
-  public logWeatherForecast() {
-    console.log(this.weatherForm.value);
+  public logWeatherForecast(weatherForm: FormGroup) {
+    console.log(weatherForm.value);
   }
 
 }

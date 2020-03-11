@@ -7,8 +7,6 @@ namespace AzureAPI.Requests
 {
     public class CreateWeatherForecastDto
     {
-        public int Id { get; set; }
-
         public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }

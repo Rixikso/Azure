@@ -4,7 +4,7 @@ namespace AzureAPI
 {
     public class WeatherForecast
     {
-        public int Id { get; set; }
+        public string Guid { get; set; }
 
         public DateTime Date { get; set; }
 
