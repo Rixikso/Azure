@@ -1,0 +1,8 @@
+<form [formGroup]="weatherForm">
+    <input type="text" formControlName="date">
+    <input type="number" formControlName="temperatureC">
+    <input type="number" formControlName="temperatureF">
+    <input type="text" formControlName="summary">
+</form>
+
+<button (click)="logWeatherForecast()">Log it!</button>    

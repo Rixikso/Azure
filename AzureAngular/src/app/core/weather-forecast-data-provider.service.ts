@@ -16,7 +16,6 @@ export class WeatherForecastDataProviderService {
   }
 
   public getAll(): Observable<WeatherForecast[]> {
-    console.log('Yoi');
     if (this.weatherForecasts) { return this.weatherForecasts; }
 
     this.weatherForecasts = this.httpClient
@@ -31,5 +30,9 @@ export class WeatherForecastDataProviderService {
       );
 
     return this.weatherForecasts;
+  }
+
+  public create(weatherForecast: WeatherForecast): Observable<any> {
+    return this.httpClient.post<WeatherForecast>(this.baseUrl + 'weatherforecast', weatherForecast);
   }
 }
