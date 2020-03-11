@@ -9,9 +9,9 @@ namespace AzureAPI.Services
     {
         Task AddAsync(T item);
 
-        Task DeleteAsync(int id);
+        Task DeleteAsync(string guid);
 
-        Task<T> GetAsync(int id);
+        Task<T> GetAsync(string guid);
 
         Task<IEnumerable<T>> GetAllAsync();
     }

@@ -15,22 +15,27 @@ namespace AzureAPI.Controllers
     {
 
         public WeatherForecastController(
+            ILogger<WeatherForecastController> logger,
             IInMemoryStorage<WeatherForecast> weatherForecastStorage)
         {
+            _logger = logger;
             _weatherForecastStorage = weatherForecastStorage;
         }
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        [HttpGet("/{guid}")]
+        public async Task<IActionResult> Get(string guid)
         {
-            _logger = logger;
-        }
-
-        [HttpGet("/{id}")]
-        public async Task<IActionResult> Get(int id)
-        {
-            var weatherForecast = await _weatherForecastStorage.GetAsync(id);
+            var weatherForecast = await _weatherForecastStorage.GetAsync(guid);
 
             return Ok(weatherForecast);
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<WeatherForecast>> GetAll()
+        {
+            var weatherForecasts = await _weatherForecastStorage.GetAllAsync();
+
+            return weatherForecasts;
         }
 
         [HttpPost]
@@ -50,8 +55,12 @@ namespace AzureAPI.Controllers
 
                 await _weatherForecastStorage.AddAsync(weatherForecast);
 
+                _logger.LogInformation($"Added new weatherForecast Guid: {guid.ToString()}");
+
                 return Created($"api/weatherForecast/{guid.ToString()}", weatherForecast);
             }
+
+            _logger.LogError($"Passed dto was bad");
 
             return BadRequest();
         }

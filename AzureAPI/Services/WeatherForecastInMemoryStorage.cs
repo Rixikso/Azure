@@ -30,17 +30,17 @@ namespace AzureAPI.Services
             return Task.CompletedTask;
         }
 
-        public Task DeleteAsync(int id)
+        public Task DeleteAsync(string guid)
         {
-            var forecastToDelete = _weatherForecasts.FirstOrDefault(forecast => forecast.Id == id);
+            var forecastToDelete = _weatherForecasts.FirstOrDefault(forecast => forecast.Guid == guid);
             _weatherForecasts.Remove(forecastToDelete);
 
             return Task.CompletedTask;
         }
 
-        public Task<WeatherForecast> GetAsync(int id)
+        public Task<WeatherForecast> GetAsync(string guid)
         {
-            var forecast = _weatherForecasts.FirstOrDefault(forecast => forecast.Id == id);
+            var forecast = _weatherForecasts.FirstOrDefault(forecast => forecast.Guid == guid);
 
             return Task.FromResult(forecast);
         }
