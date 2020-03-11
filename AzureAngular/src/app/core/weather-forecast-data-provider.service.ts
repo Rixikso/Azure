@@ -16,6 +16,7 @@ export class WeatherForecastDataProviderService {
   }
 
   public getAll(): Observable<WeatherForecast[]> {
+    console.log('Yoi');
     if (this.weatherForecasts) { return this.weatherForecasts; }
 
     this.weatherForecasts = this.httpClient

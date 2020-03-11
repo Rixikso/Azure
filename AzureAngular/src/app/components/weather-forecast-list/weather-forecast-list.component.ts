@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherForecastDataProviderService } from 'src/app/core/weather-forecast-data-provider.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-weather-forecast-list',
@@ -7,16 +8,12 @@ import { WeatherForecastDataProviderService } from 'src/app/core/weather-forecas
   styleUrls: ['./weather-forecast-list.component.scss']
 })
 export class WeatherForecastListComponent implements OnInit {
-
-  public forecasts: WeatherForecast[];
+  public forecasts$: Observable<WeatherForecast[]>;
 
   constructor(
     private weatherForcastService: WeatherForecastDataProviderService) { }
 
   public ngOnInit(): void {
-    this.weatherForcastService.getAll()
-    .subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
+    this.forecasts$ = this.weatherForcastService.getAll();
   }
 }

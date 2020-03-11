@@ -41,7 +41,7 @@ namespace AngularTests
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
