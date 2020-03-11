@@ -26,6 +26,17 @@ namespace AzureAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +47,8 @@ namespace AzureAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(MyAllowSpecificOrigins);
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -45,5 +58,7 @@ namespace AzureAPI
                 endpoints.MapControllers();
             });
         }
+
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
     }
 }
